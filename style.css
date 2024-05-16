@@ -1,0 +1,17 @@
+.form-control {
+    margin: 10px 10px;
+}
+
+.no-padding-left {
+    padding-left: 0px;
+}
+
+.sub-weather-item {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+#location {
+    width: 400px;
+}
