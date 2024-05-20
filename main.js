@@ -6,7 +6,7 @@ document.getElementById('submit-search').addEventListener('click', function () {
     fetchFromCityLocation(cityName);
 });
 
-const fetchWeatherData = function (lat, lon, city) {
+const fetchWeatherData = lat, lon, city => {
     const fetchUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=ca90637f0ed0bcfecc469a57ea89c230`;
 
     fetch(fetchUrl, {
@@ -15,7 +15,7 @@ const fetchWeatherData = function (lat, lon, city) {
     }).then(data => data.json()).then(data => readWeatherData(data, city));
 }
 
-const fetchFromCityLocation = function (city) {
+const fetchFromCityLocation = city => {
     const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=ca90637f0ed0bcfecc469a57ea89c230`;
 
     fetch(geoUrl, {
@@ -24,7 +24,7 @@ const fetchFromCityLocation = function (city) {
     }).then(data => data.json()).then(data => fetchWeatherData(data[0].lat, data[0].lon, city));
 }
 
-const readWeatherData = function (data, city) {
+const readWeatherData = city => {
     const weatherData = [];
 
     for(let i = 0; i < data.list.length; i += 8) {
@@ -37,12 +37,10 @@ const readWeatherData = function (data, city) {
 
         weatherData.push(weather);
     }
-
-    console.log(weatherData);
     renderWeather(weatherData, city);
 }
 
-const renderWeather = function (weatherData, city) {
+const renderWeather = weatherData, city => {
     if(document.querySelector('.main-weather').hasChildNodes() && document.querySelector('.sub-weather').hasChildNodes()) {
         document.querySelector('.main-weather').replaceChildren();
         document.querySelector('.sub-weather').replaceChildren();
@@ -76,7 +74,7 @@ const renderWeather = function (weatherData, city) {
           </div>
         </div>`;
 
-        if(i != 0) {
+        if  (i != 0) {
             document.querySelector('.sub-weather').insertAdjacentHTML('beforeend', subWeatherTemplate);
         } else {
             document.querySelector('.main-weather').insertAdjacentHTML('beforeend', mainWeatherTemplate);
@@ -84,7 +82,7 @@ const renderWeather = function (weatherData, city) {
     }
 }
 
-const returnWeatherIcon = function (description) {
+const returnWeatherIcon = description => {
     switch(description) {
         case 'Thunderstorm':
             return '11';
@@ -103,7 +101,7 @@ const returnWeatherIcon = function (description) {
     }
 }   
 
-const returnDayOfWeek = function (offset) {
+const returnDayOfWeek = offset => {
     let currentDay = currentDate.getDay() + offset;
     if (currentDay > 6) {
         currentDay -= 7;
